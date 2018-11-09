@@ -56,7 +56,7 @@ public class SListTest {
 		data.add("test");
 		data.add("the");
 		data.add("list");
-		Assert.assertEquals("test the string", data.join());
+		Assert.assertEquals("test the list", data.join());
 	}
 	
 	@Test

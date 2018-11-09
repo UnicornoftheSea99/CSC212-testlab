@@ -1,9 +1,11 @@
 package edu.smith.cs.csc212.testlab;
 
 import java.util.AbstractList;
+import java.util.Collections;
 
 public class SList<T> extends AbstractList<T> {
 	private Node<T> start = null;
+	private Node<T> end=null;
 	
 	/**
 	 * Add to the front of this list.
@@ -12,14 +14,19 @@ public class SList<T> extends AbstractList<T> {
 	public void addToFront(T value) {
 		start = new Node<T>(value, start);
 	}
+	
 	/**
 	 * Remove from the front of this list.
 	 * @return the value removed.
 	 */
 	public T removeFront() {
+		if (size()==0) {
+			return null;
+		}else {
 		T found = start.value;
 		start = start.next;
 		return found;
+		}
 	}
 	
 	/**
@@ -27,8 +34,14 @@ public class SList<T> extends AbstractList<T> {
 	 * @return the last item in the list.
 	 */
 	public T removeBack() {
-		// This is my fancy version of "TODO".
-		throw new UnsupportedOperationException("This is a challenge for you to implement.");
+		if (size()==0) {
+			return null;
+		}
+		else {
+		Node<T> prize = end.next;
+		T endValue = end.value;
+		return endValue;
+		}
 	}
 	
 	/**
@@ -75,8 +88,10 @@ public class SList<T> extends AbstractList<T> {
 		}
 		if (last != null) {
 			last.next = new Node<>(value);
+			end=last;
 		} else {
 			start = new Node<>(value);
+			end=start;
 		}
 		return true;
 	}
@@ -87,7 +102,7 @@ public class SList<T> extends AbstractList<T> {
 	 * @return the element.
 	 */
 	public T get(int index) {
-		int at = 1;
+		int at = 0;
 		for (Node<T> current = start; current != null; current = current.next) {
 			if (at == index) {
 				return current.value;
@@ -103,7 +118,7 @@ public class SList<T> extends AbstractList<T> {
 	 */
 	public int size() {
 		int count = 0;
-		for (Node<T> current = start; current == null; current = current.next) {
+		for (Node<T> current = start; current != null; current = current.next) {
 			count++;
 		}
 		return count;
